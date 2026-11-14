@@ -39,7 +39,7 @@ position = Vector2(584, 306)
 scale = Vector2(1.594, 1.324)
 texture = ExtResource("3_4c57u")
 
-[node name="Trampoline" type="Area2D" parent="." unique_id=1735248775 groups=["Trampoline"]]
+[node name="Trampoline" type="Area2D" parent="." unique_id=1735248775]
 
 [node name="Sprite2D" type="Sprite2D" parent="Trampoline" unique_id=1899346193]
 position = Vector2(579.5, 585.3083)
@@ -76,19 +76,20 @@ shape = SubResource("RectangleShape2D_4e8cg")
 
 [node name="Lasers" type="Area2D" parent="." unique_id=1148683622]
 
-[node name="chill warning" type="Sprite2D" parent="Lasers" unique_id=989244849]
+[node name="chill" type="Sprite2D" parent="Lasers" unique_id=989244849]
 visible = false
+position = Vector2(4, -3)
 texture = ExtResource("6_kek77")
 
-[node name="warm warning" type="Sprite2D" parent="Lasers" unique_id=25762073]
+[node name="warm" type="Sprite2D" parent="Lasers" unique_id=25762073]
 visible = false
 texture = ExtResource("7_4c57u")
 
-[node name="hot warning" type="Sprite2D" parent="Lasers" unique_id=1820443944]
+[node name="hot" type="Sprite2D" parent="Lasers" unique_id=1820443944]
 visible = false
 texture = ExtResource("8_efxa6")
 
-[node name="danger warning" type="Sprite2D" parent="Lasers" unique_id=520950843]
+[node name="danger" type="Sprite2D" parent="Lasers" unique_id=520950843]
 visible = false
 texture = ExtResource("9_dg77c")
 
