@@ -1,0 +1,97 @@
+[gd_scene format=3 uid="uid://buliek7js4qsx"]
+
+[ext_resource type="Script" uid="uid://cvmnpugs4fgpu" path="res://player.gd" id="1_0xm2m"]
+[ext_resource type="Texture2D" uid="uid://ch7hr0ua8kpn5" path="res://background1.png" id="2_kek77"]
+[ext_resource type="Script" uid="uid://p5lt8gnfexb5" path="res://background.gd" id="2_lquwl"]
+[ext_resource type="Texture2D" uid="uid://ccs17xou1howm" path="res://Godot Game Assets (1).png" id="3_1bvp3"]
+[ext_resource type="Texture2D" uid="uid://c3epb1fpp5vwf" path="res://background2.png" id="3_4c57u"]
+[ext_resource type="Texture2D" uid="uid://cdpmvcfk5pqch" path="res://trampoline (1).png" id="3_kek77"]
+[ext_resource type="Texture2D" uid="uid://cod6j4gyqcla8" path="res://warnings/chill warning.png" id="6_kek77"]
+[ext_resource type="Texture2D" uid="uid://bwfn678kgkkxg" path="res://warnings/warm warning.png" id="7_4c57u"]
+[ext_resource type="Texture2D" uid="uid://d1oj3gueocyw3" path="res://warnings/hot warning.png" id="8_efxa6"]
+[ext_resource type="Texture2D" uid="uid://ccnguvqyy3gqo" path="res://warnings/danger warning.png" id="9_dg77c"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7nn88"]
+size = Vector2(1181.5, 136)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1bvp3"]
+radius = 41.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ipam6"]
+size = Vector2(80, 716)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4e8cg"]
+size = Vector2(82, 684)
+
+[node name="Node2D" type="Node2D" unique_id=1077060002]
+
+[node name="Background" type="Area2D" parent="." unique_id=1764652502]
+script = ExtResource("2_lquwl")
+
+[node name="Sprite1" type="Sprite2D" parent="Background" unique_id=1603921426]
+position = Vector2(584, 306)
+scale = Vector2(1.5936279, 1.3236111)
+texture = ExtResource("2_kek77")
+
+[node name="Sprite2" type="Sprite2D" parent="Background" unique_id=1256842266]
+visible = false
+position = Vector2(584, 306)
+scale = Vector2(1.594, 1.324)
+texture = ExtResource("3_4c57u")
+
+[node name="Trampoline" type="Area2D" parent="." unique_id=1735248775 groups=["Trampoline"]]
+
+[node name="Sprite2D" type="Sprite2D" parent="Trampoline" unique_id=1899346193]
+position = Vector2(579.5, 585.3083)
+scale = Vector2(1.44625, 1.3799654)
+texture = ExtResource("3_kek77")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Trampoline" unique_id=402414291]
+position = Vector2(581.25, 594)
+shape = SubResource("RectangleShape2D_7nn88")
+
+[node name="Player" type="CharacterBody2D" parent="." unique_id=715217188]
+script = ExtResource("1_0xm2m")
+
+[node name="Sprite2D" type="Sprite2D" parent="Player" unique_id=1855035676]
+position = Vector2(580.4, 427.6)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("3_1bvp3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player" unique_id=2059965826]
+position = Vector2(580.4, 427.59998)
+shape = SubResource("CircleShape2D_1bvp3")
+
+[node name="LeftWall" type="Area2D" parent="." unique_id=2002776644]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftWall" unique_id=1836520423]
+position = Vector2(-33, 320)
+shape = SubResource("RectangleShape2D_ipam6")
+
+[node name="RightWall" type="Area2D" parent="." unique_id=114198212]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightWall" unique_id=803142552]
+position = Vector2(1187, 325)
+shape = SubResource("RectangleShape2D_4e8cg")
+
+[node name="Lasers" type="Area2D" parent="." unique_id=1148683622]
+
+[node name="chill warning" type="Sprite2D" parent="Lasers" unique_id=989244849]
+visible = false
+texture = ExtResource("6_kek77")
+
+[node name="warm warning" type="Sprite2D" parent="Lasers" unique_id=25762073]
+visible = false
+texture = ExtResource("7_4c57u")
+
+[node name="hot warning" type="Sprite2D" parent="Lasers" unique_id=1820443944]
+visible = false
+texture = ExtResource("8_efxa6")
+
+[node name="danger warning" type="Sprite2D" parent="Lasers" unique_id=520950843]
+visible = false
+texture = ExtResource("9_dg77c")
+
+[connection signal="body_entered" from="Trampoline" to="Player" method="_on_ground_body_entered"]
+[connection signal="body_entered" from="LeftWall" to="Player" method="_on_left_wall_body_entered"]
+[connection signal="body_entered" from="RightWall" to="Player" method="_on_right_wall_body_entered"]
