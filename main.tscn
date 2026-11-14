@@ -6,10 +6,12 @@
 [ext_resource type="Texture2D" uid="uid://ccs17xou1howm" path="res://Godot Game Assets (1).png" id="3_1bvp3"]
 [ext_resource type="Texture2D" uid="uid://c3epb1fpp5vwf" path="res://background2.png" id="3_4c57u"]
 [ext_resource type="Texture2D" uid="uid://cdpmvcfk5pqch" path="res://trampoline (1).png" id="3_kek77"]
-[ext_resource type="Texture2D" uid="uid://cod6j4gyqcla8" path="res://warnings/chill warning.png" id="6_kek77"]
-[ext_resource type="Texture2D" uid="uid://bwfn678kgkkxg" path="res://warnings/warm warning.png" id="7_4c57u"]
-[ext_resource type="Texture2D" uid="uid://d1oj3gueocyw3" path="res://warnings/hot warning.png" id="8_efxa6"]
-[ext_resource type="Texture2D" uid="uid://ccnguvqyy3gqo" path="res://warnings/danger warning.png" id="9_dg77c"]
+[ext_resource type="Script" uid="uid://dkyck0lj0jmny" path="res://lasers.gd" id="7_efxa6"]
+[ext_resource type="Texture2D" uid="uid://csnnv2b4s5bs0" path="res://danger.png" id="8_5vw27"]
+[ext_resource type="Texture2D" uid="uid://cn2t3dvhdb4oh" path="res://laser.png" id="9_kek77"]
+[ext_resource type="Texture2D" uid="uid://ba5g8n7ljswan" path="res://laser (1).png" id="10_4c57u"]
+[ext_resource type="Texture2D" uid="uid://cc1dyjtc5bw3f" path="res://laser (2).png" id="10_efxa6"]
+[ext_resource type="Script" uid="uid://dsgej6vuewkl0" path="res://menu.gd" id="11_dg77c"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7nn88"]
 size = Vector2(1181.5, 136)
@@ -22,6 +24,9 @@ size = Vector2(80, 716)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4e8cg"]
 size = Vector2(82, 684)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lc3uk"]
+size = Vector2(1184, 19)
 
 [node name="Node2D" type="Node2D" unique_id=1077060002]
 
@@ -75,24 +80,42 @@ position = Vector2(1187, 325)
 shape = SubResource("RectangleShape2D_4e8cg")
 
 [node name="Lasers" type="Area2D" parent="." unique_id=1148683622]
+script = ExtResource("7_efxa6")
 
-[node name="chill" type="Sprite2D" parent="Lasers" unique_id=989244849]
+[node name="warning" type="Sprite2D" parent="Lasers" unique_id=1791365287]
 visible = false
-position = Vector2(4, -3)
-texture = ExtResource("6_kek77")
+modulate = Color(0.23137255, 0.7294118, 0.25882354, 1)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("8_5vw27")
 
-[node name="warm" type="Sprite2D" parent="Lasers" unique_id=25762073]
+[node name="laser" type="Sprite2D" parent="Lasers" unique_id=216130601]
 visible = false
-texture = ExtResource("7_4c57u")
+scale = Vector2(1.21, 1.21)
+texture = ExtResource("9_kek77")
+region_enabled = true
+region_rect = Rect2(0, 0, 958, 102.56529)
 
-[node name="hot" type="Sprite2D" parent="Lasers" unique_id=1820443944]
+[node name="arrow" type="Sprite2D" parent="Lasers" unique_id=696516092]
 visible = false
-texture = ExtResource("8_efxa6")
+position = Vector2(-3.0349617, 68.615585)
+rotation = 1.5707964
+scale = Vector2(0.31789115, 0.3037751)
+texture = ExtResource("10_efxa6")
 
-[node name="danger" type="Sprite2D" parent="Lasers" unique_id=520950843]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Lasers" unique_id=253487011]
+position = Vector2(3, -2)
+shape = SubResource("RectangleShape2D_lc3uk")
+
+[node name="Menu" type="Area2D" parent="." unique_id=594451693]
+script = ExtResource("11_dg77c")
+
+[node name="GameOver" type="Sprite2D" parent="Menu" unique_id=313104250]
 visible = false
-texture = ExtResource("9_dg77c")
+position = Vector2(581, 326)
+scale = Vector2(1.324074, 1.324074)
+texture = ExtResource("10_4c57u")
 
 [connection signal="body_entered" from="Trampoline" to="Player" method="_on_ground_body_entered"]
 [connection signal="body_entered" from="LeftWall" to="Player" method="_on_left_wall_body_entered"]
 [connection signal="body_entered" from="RightWall" to="Player" method="_on_right_wall_body_entered"]
+[connection signal="body_entered" from="Lasers" to="Player" method="_on_lasers_body_entered"]

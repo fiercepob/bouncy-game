@@ -33,3 +33,6 @@ func _on_left_wall_body_entered(body: Node2D) -> void:
 	xVel = wallBounceStrength
 func _on_right_wall_body_entered(body: Node2D) -> void:
 	xVel = wallBounceStrength * -1
+func _on_lasers_body_entered(body: Node2D) -> void:
+	if $"../Lasers/laser".visible:
+		get_tree().paused = true
