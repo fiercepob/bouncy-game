@@ -4,9 +4,8 @@ signal gameStart
 
 func _ready():
 	get_tree().paused = true
-	
 	var time = 0.0
-	var keyReleased = true
+	var keyReleased = false
 	
 	while true:
 		await get_tree().create_timer(0.02).timeout
@@ -25,6 +24,7 @@ func _ready():
 			Global.gameRunning = true
 			get_tree().paused = false
 			gameStart.emit()
+			break
 		
 		if Input.is_key_pressed(KEY_L):
 			if Global.difficulty == 3 and keyReleased == true:

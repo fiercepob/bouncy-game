@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="Bouncing Game"
+config/name="Jelly Ball"
 run/main_scene="uid://buliek7js4qsx"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"

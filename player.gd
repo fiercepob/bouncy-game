@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+signal gameEnd
+
 var jumps = 0
 var xVel = 0
 var yVel = 0
@@ -11,6 +13,9 @@ var bounceStrength = 16.5
 var wallBounceStrength = 20
 var jumpStrength = 14
 var releasedJump = true
+
+func _ready():
+	$Sprite2D.position = Vector2(580, 427)
 
 func _physics_process(delta):
 	if Input.is_key_pressed(KEY_A):
@@ -40,4 +45,4 @@ func _on_right_wall_body_entered(body: Node2D) -> void:
 func _on_lasers_body_entered(body: Node2D) -> void:
 	if $"../Lasers/laser".visible:
 		Global.gameRunning = false
-		get_tree().paused = true
+		gameEnd.emit()

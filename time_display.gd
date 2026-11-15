@@ -7,3 +7,4 @@ func _ready():
 		await get_tree().create_timer(0.01).timeout
 		timer += 0.01
 		text = "Time Survived: " + str(snapped(timer, 0.01))
+		Global.gameScore = timer

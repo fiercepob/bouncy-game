@@ -1,14 +1,16 @@
 extends Area2D
 
 func _ready():
+	await $"../Menu".gameStart
+	
 	var minInterval = 0
 	var maxInterval = 0
 	if Global.difficulty == 1:
-		minInterval = 2
-		maxInterval = 4
-	else:
-		minInterval = 0
-		maxInterval = 0
+		minInterval = 1
+		maxInterval = 3
+	elif Global.difficulty == 2:
+		minInterval = 1
+		maxInterval = 1
 	var xPos = 0
 	var yPos = 0
 	var heatInterval = 1
@@ -17,15 +19,11 @@ func _ready():
 	elif Global.difficulty == 2:
 		heatInterval = 1
 	else:
-		heatInterval = 0.7
+		heatInterval = 0.6
 	var direction = "a"
-	var laserLifetime = 0.5
-	if Global.difficulty == 1:
-		laserLifetime = 0.4
-	elif Global.difficulty == 2:
-		laserLifetime = 0.6
-	else:
-		laserLifetime = 0.9
+	var laserLifetime = 0.4
+	if Global.difficulty == 3:
+		laserLifetime = 0.7
 	
 	while not get_tree().paused:
 		await get_tree().create_timer(randi_range(minInterval,maxInterval)).timeout

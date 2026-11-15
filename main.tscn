@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://csnnv2b4s5bs0" path="res://danger.png" id="8_5vw27"]
 [ext_resource type="Texture2D" uid="uid://cn2t3dvhdb4oh" path="res://laser.png" id="9_kek77"]
 [ext_resource type="Texture2D" uid="uid://cc1dyjtc5bw3f" path="res://laser (2).png" id="10_efxa6"]
+[ext_resource type="Script" uid="uid://dmgvgoe2vcikn" path="res://lasers_2.gd" id="11_cegan"]
 [ext_resource type="Script" uid="uid://dsgej6vuewkl0" path="res://menu.gd" id="11_dg77c"]
 [ext_resource type="Script" uid="uid://c8fu271k2nfn1" path="res://difficulty_display.gd" id="11_yaehf"]
 [ext_resource type="Script" uid="uid://m1oopa7wlbwb" path="res://time_display.gd" id="12_074og"]
@@ -18,6 +19,8 @@
 [ext_resource type="Texture2D" uid="uid://b02q6mod4f35c" path="res://menu/easy difficulty.png" id="14_w48qg"]
 [ext_resource type="Texture2D" uid="uid://bxqtmfpdhvwjk" path="res://menu/hard difficulty.png" id="15_2cqfq"]
 [ext_resource type="Texture2D" uid="uid://dey2pksyi0tws" path="res://menu/master difficulty.png" id="16_yaehf"]
+[ext_resource type="Texture2D" uid="uid://budy13mmjsok" path="res://backgrounds/death screen (2).png" id="20_getpj"]
+[ext_resource type="Script" uid="uid://dwlh7llo4bm82" path="res://death_screen.gd" id="21_getpj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7nn88"]
 size = Vector2(1181.5, 136)
@@ -112,6 +115,33 @@ texture = ExtResource("10_efxa6")
 position = Vector2(3, -2)
 shape = SubResource("RectangleShape2D_lc3uk")
 
+[node name="Lasers2" type="Area2D" parent="." unique_id=215328598]
+script = ExtResource("11_cegan")
+
+[node name="warning" type="Sprite2D" parent="Lasers2" unique_id=1336162831]
+visible = false
+modulate = Color(0.23137255, 0.7294118, 0.25882354, 1)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("8_5vw27")
+
+[node name="laser" type="Sprite2D" parent="Lasers2" unique_id=1758775704]
+visible = false
+scale = Vector2(1.21, 1.21)
+texture = ExtResource("9_kek77")
+region_enabled = true
+region_rect = Rect2(0, 0, 958, 102.56529)
+
+[node name="arrow" type="Sprite2D" parent="Lasers2" unique_id=967828875]
+visible = false
+position = Vector2(-3.0349617, 68.615585)
+rotation = 1.5707964
+scale = Vector2(0.31789115, 0.3037751)
+texture = ExtResource("10_efxa6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Lasers2" unique_id=1184560165]
+position = Vector2(3, -2)
+shape = SubResource("RectangleShape2D_lc3uk")
+
 [node name="DifficultyDisplay" type="Label" parent="." unique_id=140826775]
 offset_left = 875.0
 offset_top = 6.0
@@ -157,7 +187,27 @@ visible = false
 position = Vector2(580, 540)
 texture = ExtResource("16_yaehf")
 
+[node name="DeathScreen" type="Sprite2D" parent="." unique_id=730548355]
+visible = false
+position = Vector2(584.667, 325.5)
+scale = Vector2(1.239, 1.239)
+texture = ExtResource("20_getpj")
+script = ExtResource("21_getpj")
+
+[node name="scoreDisplay" type="Label" parent="DeathScreen" unique_id=984800668]
+visible = false
+modulate = Color(0, 0, 0, 1)
+texture_filter = 1
+offset_left = 93.89267
+offset_top = 18.96695
+offset_right = 132.02829
+offset_bottom = 41.96936
+scale = Vector2(4, 4)
+text = "9.50"
+
 [connection signal="body_entered" from="Trampoline" to="Player" method="_on_ground_body_entered"]
+[connection signal="gameEnd" from="Player" to="DeathScreen" method="_on_player_game_end"]
 [connection signal="body_entered" from="LeftWall" to="Player" method="_on_left_wall_body_entered"]
 [connection signal="body_entered" from="RightWall" to="Player" method="_on_right_wall_body_entered"]
 [connection signal="body_entered" from="Lasers" to="Player" method="_on_lasers_body_entered"]
+[connection signal="body_entered" from="Lasers2" to="Player" method="_on_lasers_body_entered"]
