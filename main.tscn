@@ -1,17 +1,23 @@
 [gd_scene format=3 uid="uid://buliek7js4qsx"]
 
 [ext_resource type="Script" uid="uid://cvmnpugs4fgpu" path="res://player.gd" id="1_0xm2m"]
-[ext_resource type="Texture2D" uid="uid://ch7hr0ua8kpn5" path="res://background1.png" id="2_kek77"]
+[ext_resource type="Texture2D" uid="uid://ch7hr0ua8kpn5" path="res://backgrounds/background1.png" id="2_kek77"]
 [ext_resource type="Script" uid="uid://p5lt8gnfexb5" path="res://background.gd" id="2_lquwl"]
 [ext_resource type="Texture2D" uid="uid://ccs17xou1howm" path="res://Godot Game Assets (1).png" id="3_1bvp3"]
-[ext_resource type="Texture2D" uid="uid://c3epb1fpp5vwf" path="res://background2.png" id="3_4c57u"]
+[ext_resource type="Texture2D" uid="uid://c3epb1fpp5vwf" path="res://backgrounds/background2.png" id="3_4c57u"]
 [ext_resource type="Texture2D" uid="uid://cdpmvcfk5pqch" path="res://trampoline (1).png" id="3_kek77"]
 [ext_resource type="Script" uid="uid://dkyck0lj0jmny" path="res://lasers.gd" id="7_efxa6"]
 [ext_resource type="Texture2D" uid="uid://csnnv2b4s5bs0" path="res://danger.png" id="8_5vw27"]
 [ext_resource type="Texture2D" uid="uid://cn2t3dvhdb4oh" path="res://laser.png" id="9_kek77"]
-[ext_resource type="Texture2D" uid="uid://ba5g8n7ljswan" path="res://laser (1).png" id="10_4c57u"]
 [ext_resource type="Texture2D" uid="uid://cc1dyjtc5bw3f" path="res://laser (2).png" id="10_efxa6"]
 [ext_resource type="Script" uid="uid://dsgej6vuewkl0" path="res://menu.gd" id="11_dg77c"]
+[ext_resource type="Script" uid="uid://c8fu271k2nfn1" path="res://difficulty_display.gd" id="11_yaehf"]
+[ext_resource type="Script" uid="uid://m1oopa7wlbwb" path="res://time_display.gd" id="12_074og"]
+[ext_resource type="Texture2D" uid="uid://emr54a276irt" path="res://menu/backgroundmenu (2).png" id="12_ycdy4"]
+[ext_resource type="Texture2D" uid="uid://cmrv5pjrnq1ld" path="res://menu/play button.png" id="13_ycdy4"]
+[ext_resource type="Texture2D" uid="uid://b02q6mod4f35c" path="res://menu/easy difficulty.png" id="14_w48qg"]
+[ext_resource type="Texture2D" uid="uid://bxqtmfpdhvwjk" path="res://menu/hard difficulty.png" id="15_2cqfq"]
+[ext_resource type="Texture2D" uid="uid://dey2pksyi0tws" path="res://menu/master difficulty.png" id="16_yaehf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7nn88"]
 size = Vector2(1181.5, 136)
@@ -106,14 +112,50 @@ texture = ExtResource("10_efxa6")
 position = Vector2(3, -2)
 shape = SubResource("RectangleShape2D_lc3uk")
 
+[node name="DifficultyDisplay" type="Label" parent="." unique_id=140826775]
+offset_left = 875.0
+offset_top = 6.0
+offset_right = 996.0
+offset_bottom = 40.0
+scale = Vector2(2, 2)
+text = "Difficulty: Easy"
+script = ExtResource("11_yaehf")
+
+[node name="TimeDisplay" type="Label" parent="." unique_id=1003506112]
+offset_left = 12.0
+offset_top = 6.0
+offset_right = 153.0
+offset_bottom = 29.0
+scale = Vector2(2, 2)
+text = "Time Survived: 0.00"
+script = ExtResource("12_074og")
+
 [node name="Menu" type="Area2D" parent="." unique_id=594451693]
 script = ExtResource("11_dg77c")
 
-[node name="GameOver" type="Sprite2D" parent="Menu" unique_id=313104250]
+[node name="background" type="Sprite2D" parent="Menu" unique_id=1801918247]
+position = Vector2(584.6667, 325.5)
+scale = Vector2(1.238889, 1.2388889)
+texture = ExtResource("12_ycdy4")
+
+[node name="playButton" type="Sprite2D" parent="Menu" unique_id=1421230393]
+position = Vector2(578.00006, 372)
+scale = Vector2(0.83156025, 0.79787236)
+texture = ExtResource("13_ycdy4")
+
+[node name="easyDifficulty" type="Sprite2D" parent="Menu" unique_id=2124103582]
+position = Vector2(580, 540)
+texture = ExtResource("14_w48qg")
+
+[node name="hardDifficulty" type="Sprite2D" parent="Menu" unique_id=922191798]
 visible = false
-position = Vector2(581, 326)
-scale = Vector2(1.324074, 1.324074)
-texture = ExtResource("10_4c57u")
+position = Vector2(580, 540)
+texture = ExtResource("15_2cqfq")
+
+[node name="masterDifficulty" type="Sprite2D" parent="Menu" unique_id=424131711]
+visible = false
+position = Vector2(580, 540)
+texture = ExtResource("16_yaehf")
 
 [connection signal="body_entered" from="Trampoline" to="Player" method="_on_ground_body_entered"]
 [connection signal="body_entered" from="LeftWall" to="Player" method="_on_left_wall_body_entered"]

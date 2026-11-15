@@ -10,15 +10,19 @@ var playerSpeed = 0.6
 var bounceStrength = 16.5
 var wallBounceStrength = 20
 var jumpStrength = 14
+var releasedJump = true
 
 func _physics_process(delta):
 	if Input.is_key_pressed(KEY_A):
 		xVel -= playerSpeed
 	if Input.is_key_pressed(KEY_D):
 		xVel += playerSpeed
-	if Input.is_key_pressed(KEY_W) and jumps < 1:
+	if Input.is_key_pressed(KEY_W) and jumps < 1 and releasedJump:
 		yVel = jumpStrength * -1
 		jumps += 1
+		releasedJump = false
+	if not Input.is_key_pressed(KEY_W):
+		releasedJump = true
 	xVel *= drag 
 	yVel += gravity
 	
@@ -35,4 +39,5 @@ func _on_right_wall_body_entered(body: Node2D) -> void:
 	xVel = wallBounceStrength * -1
 func _on_lasers_body_entered(body: Node2D) -> void:
 	if $"../Lasers/laser".visible:
+		Global.gameRunning = false
 		get_tree().paused = true
